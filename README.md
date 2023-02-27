@@ -149,16 +149,3 @@ npm start
 1. 客户端的代码打包后资源默认放在`chatServer`文件夹的`public`目录下；
 2. 管理员端在`chatAdmin`的`build`目录下，需要自己自己手动将整个build目录复制到`chatServer`文件夹的`public`目录下，然后修改`build`目录文件的`index.html`中引入资源路径前都加上`/build`。
 
-## 交流
-
-- qq群
-
-![qq](./document/resources/qqgroup.jpg)
-
-- `E-mail`：`ccdebuging@gmail.com`、`cAuth1218@163.com`
-- `QQ`：`1831058205`
-- 微信：`cAutg9248`
-
-## 参考项目
-
-- https://github.com/wuyawei
