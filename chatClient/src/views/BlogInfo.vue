@@ -24,8 +24,7 @@
       </div>
       <div
         :class="device === 'Mobile' ? 'blog-aside mobile' : 'blog-aside'"
-        :style="device !== 'Mobile' ? {top: pageScrollTop + 300 + 'px'} : {}"
-      >
+        :style="device !== 'Mobile' ? {top: pageScrollTop + 300 + 'px'} : {}">
         <span class="item like iconfont icon-dianzan"></span>
         <span class="item comment iconfont icon-pinglun1"></span>
       </div>

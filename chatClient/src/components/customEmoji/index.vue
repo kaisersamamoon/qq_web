@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 import emojis from '@/const/emoji'
 export default {
   props: {
@@ -31,6 +32,7 @@ export default {
     return {
       emojisList: emojis.data,
       selectedEmoji: '',
+      //表情分类
       emijoIconClassNameMap: {
         face: 'iconfont icon-buoumaotubiao49',
         heart: 'iconfont icon-Heart',

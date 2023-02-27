@@ -5,6 +5,7 @@
         v-show="device === 'Desktop' || (device === 'Mobile' && currentUI === 'conversation')"
         :class="device === 'Mobile' ? 'conversation-list mobile' : 'conversation-list'"
       >
+<!--        消息列表-->
         <conversation-list
           :currentConversation="currentConversation"
           :set-current-conversation="setCurrentConversation"
@@ -48,7 +49,7 @@ export default {
     return {
       currentConversation: {},
       loading: false,
-      matterLevelMap: { 
+      matterLevelMap: {
         'danger': '紧急事项' ,
         'warning': '重要事项' ,
         'normal': '一般事项' ,

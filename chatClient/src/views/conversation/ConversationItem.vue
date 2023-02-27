@@ -21,7 +21,7 @@
               >
             </el-avatar>
           </el-badge>
-          
+
           <div class="conversation-detail">
             <span class="top-item primary-font detail-item ellipsis space-bw" style="display: flex">
               <span class="ellipsis">{{conversationInfo.groupId.title}}</span>
@@ -56,7 +56,7 @@
               <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
             </el-avatar>
           </el-badge>
-          
+
           <div class="conversation-detail">
             <span class="top-item primary-font detail-item ellipsis space-bw" style="display: flex">
               <span class="ellipsis">{{conversationInfo.beizhu ? conversationInfo.beizhu : conversationInfo.nickname}}</span>
@@ -70,6 +70,7 @@
           </div>
         </div>
       </div>
+<!--  好友右键   -->
       <div class="menu" v-if="isShowMenu" :style="{'left': menuLeft + 'px', 'top': menuTop + 'px'}">
         <conversation-menu
           :conversation="conversationInfo"
@@ -190,7 +191,7 @@ export default {
     document.addEventListener('mousedown', (e) => {
       const { button } = e
       if (button === 2) {
-        this.isShowMenu = false        
+        this.isShowMenu = false
       }
     })
   },

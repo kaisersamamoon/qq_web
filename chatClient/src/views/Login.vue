@@ -149,7 +149,7 @@ export default {
         } else {
           this.$message.error(msg)
           if (status === 1006 || status === 1007) {
-            this.$confirm(`你的${msg}，如需恢复请联系管理员：ccdebuging@gmail.com`, `通知：${msg}`, {
+            this.$confirm(`你的${msg}，如需恢复请联系管理员`, `通知：${msg}`, {
               // confirmButtonText: '确定',
               // cancelButtonText: '取消',
               type: 'error'
@@ -231,6 +231,7 @@ export default {
     transform: translateX(-50%);
     margin: 0 auto;
     width: 60%;
+
   }
   .wrapper {
     background-color: #fff;
@@ -265,4 +266,5 @@ export default {
     }
   }
 }
+
 </style>

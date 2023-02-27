@@ -1,8 +1,8 @@
 <template>
   <div class="copyright-cmp">
-    <p class="copyright-item">Copyright©2019-{{endTime}}</p>
-    <p class="copyright-item">作者：chenchao</p>
-    <p class="copyright-item">联系我：cAuth1218@163.com</p>
+<!--    <p class="copyright-item">Copyright©2023-{{endTime}}</p>-->
+    <p class="copyright-item">作者：kaiser</p>
+    <p class="copyright-item">联系我：1587973663@qq.com</p>
   </div>
 </template>
 

@@ -12,6 +12,7 @@
     </div>
     <transition-group appear name="hro-scroll">
     <!-- <transition-group appear :name="useanimation ? 'hro-scroll' : ''"> -->
+<!--      聊天对话框-->
       <message-item
         v-for="(item, index) in messagelist"
         :key="index"

@@ -1,6 +1,4 @@
-# Co-messager
 
-> 本项目不再维护，如在阅读**文档**、观看**视频**后任有问题可以加群或者本人 `QQ` 和微信。
 
 ## 相关工具版本
 
@@ -8,20 +6,12 @@
 2. npm: 6.4.1
 3. MongoDB: 5.0.3
 
-## 相关地址
-
-- [掘金-文章](https://juejin.im/post/5e8dd45cf265da47e34bf94d)
-- [功能介绍-视频](https://www.bilibili.com/video/BV1aX4y1K7EF?p=1)
-- [项目运行-视频](https://www.bilibili.com/video/BV1aX4y1K7EF?p=2)
-
 ## 功能
 - [x] 登陆注册
 - [x] 单聊
 - [x] 群聊
 - [x] 历史消息
 - [x] 图片发送
-- [ ] 文件发送
-- [ ] 代码片段发送
 - [x] 表情发送
 - [x] 白板协作
 - [x] 音视频聊天
@@ -45,28 +35,16 @@
 ### 1、克隆项目
 
 ```bash
-git clone git@github.com:CCZX/wechat.git
+git clone git@github.com:kaisersamamoon/boke.git
 ```
 
 或者下载压缩包解压也可以。
-
-### 2、删除相关代码
-
-> 这部分代码是在我的数据库里，所以你需要删除或者替换相关代码以防报错
-
-![removed code](./document/clean.png)
-
-**需要注意的是这一步需要在启动服务端之前执行。不然会出现不可预料的错误**
 
 ### 2、启动MongoDB数据库
 
 ```bash
 mongo
 ```
-
-如果还没有安装MongoDB可以参考下面文章：
-- [mongoDB - 菜鸟教程](https://www.runoob.com/mongodb/mongodb-tutorial.html)
-- [mongoDB的安装和启动](https://juejin.cn/post/6844903958826188808)
 
 ### 3、启动服务器
 
@@ -102,10 +80,6 @@ npm start
 
 
 ## 项目截图
-
-**github上如果没有科学上网容易裂图，推荐在掘金上看：** 
-
-地址：https://juejin.im/post/5e8dd45cf265da47e34bf94d
 
 ### PC端
 
@@ -175,16 +149,3 @@ npm start
 1. 客户端的代码打包后资源默认放在`chatServer`文件夹的`public`目录下；
 2. 管理员端在`chatAdmin`的`build`目录下，需要自己自己手动将整个build目录复制到`chatServer`文件夹的`public`目录下，然后修改`build`目录文件的`index.html`中引入资源路径前都加上`/build`。
 
-## 交流
-
-- qq群
-
-![qq](./document/resources/qqgroup.jpg)
-
-- `E-mail`：`ccdebuging@gmail.com`、`cAuth1218@163.com`
-- `QQ`：`1831058205`
-- 微信：`cAutg9248`
-
-## 参考项目
-
-- https://github.com/wuyawei
