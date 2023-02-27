@@ -12,6 +12,7 @@
     <el-tabs type="border-card" :stretch="true">
       <el-tab-pane>
         <span slot="label"><i class="el-icon-chat-line-round"></i></span>
+
         <recent-conversation-list
           :current-conversation="currentConversation"
           :set-current-conversation="setCurrentConversation"

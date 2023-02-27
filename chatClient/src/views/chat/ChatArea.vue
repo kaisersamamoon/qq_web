@@ -1,15 +1,20 @@
 <template>
+<!--  详细聊天页面-->
   <div class="chat-area__com">
+<!--    上方功能区-->
     <chat-header
       :currentConversation="currentConversation"
       :set-current-conversation="setCurrentConversation"
     />
+
     <transition name="slide-up">
       <div class="history-msg-container" v-if="showHistoryMsg">
         <history-msg :current-conversation="currentConversation" />
       </div>
     </transition>
+<!--  右边功能区-->
     <div :class="currentConversation.conversationType !== 'GROUP' ? 'main no-group' : 'main'">
+      <!--    好友聊天记录-->
       <div class="message-list-container">
         <message-list ref='messagelist'
           @load-message="loadmessage"
@@ -23,27 +28,29 @@
           :set-last-enter-time="setLastEnterTime"
         />
       </div>
+<!--     群聊-->
       <div class="group-desc" v-if="device !== 'Mobile' && currentConversation.conversationType === 'GROUP'">
         <group-desc :currentConversation="currentConversation" :key="datetamp" />
       </div>
     </div>
+<!--    消息框上方选择项-->
     <div class="message-edit-container">
       <div class="send-type">
         <i class="item iconfont icon-emoji" @click.stop="showEmojiCom = !showEmojiCom"></i>
-        <i class="item el-icon-picture" @click.stop="showUpImgCom = !showUpImgCom" />
-        <label for="upfile">
-          <el-tooltip class="item" effect="dark" content="只能上传小于 2M 的文件" placement="top">
-            <i class="item el-icon-folder">
-              <input
-                id="upfile"
-                class="file-inp upload"
-                type="file"
-                title="选择文件"
-                @change="fileInpChange"
-              >
-            </i>
-          </el-tooltip>
-        </label>
+<!--        <i class="item el-icon-picture" @click.stop="showUpImgCom = !showUpImgCom" />-->
+<!--        <label for="upfile">-->
+<!--          <el-tooltip class="item" effect="dark" content="只能上传小于 2M 的文件" placement="top">-->
+<!--            <i class="item el-icon-folder">-->
+<!--              <input-->
+<!--                id="upfile"-->
+<!--                class="file-inp upload"-->
+<!--                type="file"-->
+<!--                title="选择文件"-->
+<!--                @change="fileInpChange"-->
+<!--              >-->
+<!--            </i>-->
+<!--          </el-tooltip>-->
+<!--        </label>-->
         <i class="item iconfont icon-huaban" />
         <i class="item iconfont icon-shipin" />
         <i class="item el-icon-phone-outline" />
@@ -70,8 +77,9 @@
           :get-local-url="getLocalUrl"
         />
       </transition>
+<!--      表情详细框-->
       <transition name="fade">
-        <custom-emoji v-if="showEmojiCom" class="emoji-component" @addemoji="addEmoji" />        
+        <custom-emoji v-if="showEmojiCom" class="emoji-component" @addemoji="addEmoji" />
       </transition>
     </div>
   </div>
@@ -331,7 +339,7 @@ export default {
     watchWebRtcMsg() {
       this.$eventBus.$on('web_rtc_msg', (e) => {
         const { type } = e
-        // const 
+        // const
         const common = this.generatorMessageCommon()
         const newMessage = {
           ...common,
@@ -437,7 +445,7 @@ export default {
     }
     .group-desc {
       width: 0%;
-    } 
+    }
   }
   .message-edit-container {
     box-sizing: border-box;

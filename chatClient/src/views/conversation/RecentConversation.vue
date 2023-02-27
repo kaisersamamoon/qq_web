@@ -1,4 +1,5 @@
 <template>
+<!--  有聊天消息-->
   <div class="recent-conversation-list" v-loading="isLoading">
     <transition-group name="slide-up" appear>
       <conversation-item
@@ -12,6 +13,7 @@
         type="recent"
       />
     </transition-group>
+<!--    无聊天消息-->
     <div class="empty hor-ver-center" v-if="!outcomeConversationList.length">
       <empty-svg width="200" height="200" />
       <span class="secondary-font">最近没有聊天好友</span>
@@ -86,7 +88,7 @@ export default {
         res.roomid = item.userM._id + '-' + item.userY._id
         if (item.userM._id === myId && item.userY._id !== myId) {
           res = {
-            ...res, ...item.userY, 
+            ...res, ...item.userY,
             conversationType: conversationTypes.friend,
             myNickname: this.userInfo.nickname,
             myId: this.userInfo._id,
@@ -94,7 +96,7 @@ export default {
           }
         } else {
           res = {
-            ...res, ...item.userM, 
+            ...res, ...item.userM,
             conversationType: conversationTypes.friend,
             myNickname: this.userInfo.nickname,
             myId: this.userInfo._id,

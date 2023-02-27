@@ -1,4 +1,5 @@
 <template>
+<!--  好友选项展开项-->
   <div class="conversation-item-menu box-shadow1">
     <span class="menu-item operation-text" v-if="type === 'recent'" @click.stop="remove">关闭会话</span>
     <span class="menu-item operation-text" @click.stop="viewProfile">查看资料</span>
