@@ -10,6 +10,7 @@
       v-if="isShowBeizhuModal"
       :current-conversation="currentConversation"
     />
+    <!-- 创建群聊弹窗 -->
     <transition name="fade">
       <bearing-modal
         v-if="showModal && isShowCreateGroup"

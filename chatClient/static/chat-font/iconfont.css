@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3992322 */
+  src: url('iconfont.woff2?t=1680513131421') format('woff2'),
+       url('iconfont.woff?t=1680513131421') format('woff'),
+       url('iconfont.ttf?t=1680513131421') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.chat-chat-fill:before {
+  content: "\e616";
+}
+
+.chat-message:before {
+  content: "\e62a";
+}
+
+.chat-group:before {
+  content: "\e630";
+}
+
+.chat-my:before {
+  content: "\e635";
+}
+
+.chat-man-add:before {
+  content: "\e69a";
+}
+
+.chat-chat:before {
+  content: "\e615";
+}
+
+.chat-moment:before {
+  content: "\e62b";
+}
+
+.chat-plus:before {
+  content: "\e644";
+}
+

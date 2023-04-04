@@ -14,11 +14,8 @@
             <el-avatar
               size="large"
               :src="IMG_URL + conversationInfo.groupId.img"
-              @error="() => true"
-            >
-              <img
-                src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-              >
+              @error="() => true">
+              <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png">
             </el-avatar>
           </el-badge>
 

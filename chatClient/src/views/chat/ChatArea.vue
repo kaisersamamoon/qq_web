@@ -1,7 +1,7 @@
 <template>
-<!--  详细聊天页面-->
+  <!--  详细聊天页面-->
   <div class="chat-area__com">
-<!--    上方功能区-->
+    <!--    上方功能区-->
     <chat-header
       :currentConversation="currentConversation"
       :set-current-conversation="setCurrentConversation"
@@ -9,51 +9,66 @@
 
     <transition name="slide-up">
       <div class="history-msg-container" v-if="showHistoryMsg">
-        <history-msg :current-conversation="currentConversation" />
+        <history-msg :current-conversation="currentConversation"/>
       </div>
     </transition>
-<!--  右边功能区-->
+    <!--  右边功能区-->
     <div :class="currentConversation.conversationType !== 'GROUP' ? 'main no-group' : 'main'">
       <!--    好友聊天记录-->
       <div class="message-list-container">
         <message-list ref='messagelist'
-          @load-message="loadmessage"
-          :messagelist="messagesOutcome"
-          :scrollbottom="scrollBottom"
-          :hasmore="hasMore"
-          :isloading="isLoading"
-          :useanimation="useAnimation"
-          :currentConversation="currentConversation"
-          :last-enter-time="lastEnterTime"
-          :set-last-enter-time="setLastEnterTime"
+                      @load-message="loadmessage"
+                      :messagelist="messagesOutcome"
+                      :scrollbottom="scrollBottom"
+                      :hasmore="hasMore"
+                      :isloading="isLoading"
+                      :useanimation="useAnimation"
+                      :currentConversation="currentConversation"
+                      :last-enter-time="lastEnterTime"
+                      :set-last-enter-time="setLastEnterTime"
         />
       </div>
-<!--     群聊-->
+      <!--     群聊-->
       <div class="group-desc" v-if="device !== 'Mobile' && currentConversation.conversationType === 'GROUP'">
-        <group-desc :currentConversation="currentConversation" :key="datetamp" />
+        <group-desc :currentConversation="currentConversation" :key="datetamp"/>
       </div>
     </div>
-<!--    消息框上方选择项-->
+    <!--    消息框上方选择项-->
     <div class="message-edit-container">
       <div class="send-type">
+        <!--    表情    -->
         <i class="item iconfont icon-emoji" @click.stop="showEmojiCom = !showEmojiCom"></i>
-<!--        <i class="item el-icon-picture" @click.stop="showUpImgCom = !showUpImgCom" />-->
-<!--        <label for="upfile">-->
-<!--          <el-tooltip class="item" effect="dark" content="只能上传小于 2M 的文件" placement="top">-->
-<!--            <i class="item el-icon-folder">-->
-<!--              <input-->
-<!--                id="upfile"-->
-<!--                class="file-inp upload"-->
-<!--                type="file"-->
-<!--                title="选择文件"-->
-<!--                @change="fileInpChange"-->
-<!--              >-->
-<!--            </i>-->
-<!--          </el-tooltip>-->
-<!--        </label>-->
-        <i class="item iconfont icon-huaban" />
-        <i class="item iconfont icon-shipin" />
-        <i class="item el-icon-phone-outline" />
+        <!--        <i class="item el-icon-picture" @click.stop="showUpImgCom = !showUpImgCom" />-->
+        <!--        <label for="upfile">-->
+        <!--          <el-tooltip class="item" effect="dark" content="只能上传小于 2M 的文件" placement="top">-->
+        <!--            <i class="item el-icon-folder">-->
+        <!--              <input-->
+        <!--                id="upfile"-->
+        <!--                class="file-inp upload"-->
+        <!--                type="file"-->
+        <!--                title="选择文件"-->
+        <!--                @change="fileInpChange"-->
+        <!--              >-->
+        <!--            </i>-->
+        <!--          </el-tooltip>-->
+        <!--        </label>-->
+        <span v-if="currentConversation.conversationType != 'GROUP'">
+            <el-tooltip class="item" effect="dark" content="白板协作需要良好的网络环境" placement="top">
+              <i
+                v-if="device !== 'Mobile'"
+                class="operation-item iconfont icon-huaban"
+                @click="enterArtBoard"></i>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="视频通话需要良好的网络环境" placement="top">
+              <i class="operation-item iconfont icon-shipin" @click="videoCall"></i>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="视频通话需要良好的网络环境" placement="top">
+              <i class="operation-item el-icon-phone-outline" @click="audioCall"></i>
+            </el-tooltip>
+          </span>
+        <!--        <i class="item iconfont icon-huaban" />-->
+        <!--        <i class="item iconfont icon-shipin" />-->
+        <!--        <i class="item el-icon-phone-outline" />-->
         <span
           :class="showHistoryMsg ? 'history-btn normal-font el-icon-caret-bottom' : 'history-btn normal-font el-icon-caret-top'"
           @click="setShowHistoryMsg">历史记录</span>
@@ -65,7 +80,8 @@
       <div style="display: none" contenteditable="true" class="textarea" @input="test">
 
       </div>
-      <textarea ref="chatInp" class="textarea" v-model="messageText" maxlength="200" @input="scrollBottom = true" @keydown.enter="send($event)"></textarea>
+      <textarea ref="chatInp" class="textarea" v-model="messageText" maxlength="200" @input="scrollBottom = true"
+                @keydown.enter="send($event)"></textarea>
       <transition name="fade">
         <up-img
           v-if="showUpImgCom"
@@ -77,27 +93,29 @@
           :get-local-url="getLocalUrl"
         />
       </transition>
-<!--      表情详细框-->
+      <!--      表情详细框-->
       <transition name="fade">
-        <custom-emoji v-if="showEmojiCom" class="emoji-component" @addemoji="addEmoji" />
+        <custom-emoji v-if="showEmojiCom" class="emoji-component" @addemoji="addEmoji"/>
       </transition>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex"
-import { cloneDeep } from 'lodash'
-import { fromatTime } from "@/utils"
+import {mapState} from "vuex"
+import {cloneDeep} from 'lodash'
+import {fromatTime} from "@/utils"
 import chatHeader from "./components/Header"
 import messageList from "./components/MessageList"
-import { SET_UNREAD_NEWS_TYPE_MAP } from "@/store/constants"
-import { conversationTypes, uploadImgStatusMap, qiniu_URL } from '@/const'
+import {SET_UNREAD_NEWS_TYPE_MAP} from "@/store/constants"
+import {conversationTypes, uploadImgStatusMap, qiniu_URL} from '@/const'
 import customEmoji from '@/components/customEmoji'
 import upImg from '@/components/customUploadImg'
 import groupDesc from './components/GroupDesc'
 import historyMsg from './components/HistoryMsg'
 import xss from '@/utils/xss'
+import {WEB_RTC_MSG_TYPE} from '@/const'
+
 export default {
   props: {
     currentConversation: Object,
@@ -127,6 +145,11 @@ export default {
     ...mapState("user", {
       userInfo: "userInfo"
     }),
+    ...mapState('app', {
+      isToCoArtBoard: 'isToCoArtBoard',
+      isVideoing: 'isVideoing',
+      isAudioing: 'isAudioing'
+    }),
     messagesOutcome() {
       return this.messages.filter(item => {
         return item.roomid === this.currentConversation.roomid
@@ -155,6 +178,21 @@ export default {
     }
   },
   methods: {
+    enterArtBoard() {
+      if (this.isToCoArtBoard || this.isVideoing || this.isAudioing) return
+      this.$store.dispatch('app/SET_ISTOCOARTBOARD', true)
+      this.$eventBus.$emit('web_rtc_msg', {type: WEB_RTC_MSG_TYPE.artBoard})
+    },
+    videoCall() {
+      if (this.isToCoArtBoard || this.isVideoing || this.isAudioing) return
+      this.$store.dispatch('app/SET_IS_VIDEOING', true)
+      this.$eventBus.$emit('web_rtc_msg', {type: WEB_RTC_MSG_TYPE.video})
+    },
+    audioCall() {
+      if (this.isToCoArtBoard || this.isVideoing || this.isAudioing) return
+      this.$store.dispatch('app/SET_IS_AUDIOING', true)
+      this.$eventBus.$emit('web_rtc_msg', {type: WEB_RTC_MSG_TYPE.audio})
+    },
     test(e) {
       console.log(e, 123132)
     },
@@ -179,7 +217,7 @@ export default {
       }
     },
     getImgUploadResult(res) {
-      const { guid } = res // 图片的唯一标识
+      const {guid} = res // 图片的唯一标识
       const msgListClone = cloneDeep(this.messages)
       if (res.status === uploadImgStatusMap.error) {
         this.$message.error('图片上传失败！')
@@ -291,14 +329,14 @@ export default {
       if (this.isLoading) return // 防止重复发起请求
       this.isLoading = true
       init && this.setLoading(true) // 只有在第一次加载的时候才让ChatArea有loading动画，后面加载时不显示
-      const { roomid, conversationType } = this.currentConversation
+      const {roomid, conversationType} = this.currentConversation
       const params = {
         roomid,
         page: this.page,
         pageSize: this.pageSize
       }
       if (conversationType === conversationTypes.friend) {
-        const { data, status } = await this.$http.getRecentNews(params)
+        const {data, status} = await this.$http.getRecentNews(params)
         this.setLoading(false)
         if (data.status === 2000 && status === 200) {
           this.isLoading = false
@@ -311,7 +349,7 @@ export default {
           this.page++
         }
       } else if (conversationType === conversationTypes.group) {
-        const { data, status } = await this.$http.getRecentGroupNews(params)
+        const {data, status} = await this.$http.getRecentGroupNews(params)
         this.setLoading(false)
         this.isLoading = false
         if (data.status === 2000 && status === 200) {
@@ -338,7 +376,7 @@ export default {
     },
     watchWebRtcMsg() {
       this.$eventBus.$on('web_rtc_msg', (e) => {
-        const { type } = e
+        const {type} = e
         // const
         const common = this.generatorMessageCommon()
         const newMessage = {
@@ -394,7 +432,7 @@ export default {
     document.addEventListener('click', this.handlerShowEmoji)
     this.getRecentNews()
     this.$http.getQiniuToken().then(res => {
-      const { data } = res
+      const {data} = res
       this.token = data.data
     })
   },
@@ -410,72 +448,87 @@ export default {
 
 <style lang="scss">
 @import './../../../static/css/animation.scss';
+
 .chat-area__com {
   position: relative;
   height: 100%;
+
   .history-msg-container {
     position: absolute;
     z-index: 1004;
     height: calc(100% - 210px);
     width: 100%;
   }
+
   .main {
     display: flex;
     position: relative;
     height: calc(100% - 210px);
     width: 100%;
+
     .message-list-container {
       position: relative;
       height: 100%;
       width: 75%;
       flex: 1;
+
       .top-operation {
         position: absolute;
       }
     }
+
     .group-desc {
       height: 100%;
       width: 25%;
     }
   }
+
   .main.no-group {
     .message-list-container {
       height: 100%;
       width: 100%;
     }
+
     .group-desc {
       width: 0%;
     }
   }
+
   .message-edit-container {
     box-sizing: border-box;
     position: relative;
     height: 150px;
     border-top: 1px solid #cccccc;
+
     .send-type {
       position: relative;
       padding: 5px 10px 0;
       height: 25px;
+
       .item {
         cursor: pointer;
         font-size: 20px;
         margin-right: 10px;
+
         .upload {
           display: none;
           border: none;
         }
       }
+
       .history-btn {
         position: absolute;
         right: 5px;
         cursor: pointer;
       }
     }
+
     .operation {
       position: absolute;
       bottom: 5px;
       right: 2px;
     }
+
     .textarea {
       overflow-x: hidden;
       box-sizing: border-box;
@@ -489,10 +542,12 @@ export default {
       background-color: #e9ebee;
       padding: 10px;
       resize: none;
+
       img {
         width: 50px;
       }
     }
+
     .emoji-component {
       position: absolute;
       bottom: 101%;

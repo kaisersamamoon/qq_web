@@ -1,15 +1,16 @@
 <template>
   <div class="conversationlist-com">
-    <div
-      class="search"
-      :style="device === 'Mobile' ? {marginLeft: '50px'} : {}"
-    >
-      <top-search />
+    <!--    搜索框-->
+    <div class="search" :style="device === 'Mobile' ? {marginLeft: '50px'} : {}">
+      <top-search/>
     </div>
+    <!--   待办事项组件 -->
     <div class="todo">
-      <todo />
+      <todo/>
     </div>
+<!--  消息 好友 群切换栏-->
     <el-tabs type="border-card" :stretch="true">
+
       <el-tab-pane>
         <span slot="label"><i class="el-icon-chat-line-round"></i></span>
 
@@ -19,10 +20,11 @@
           @setCurrentConversation="setCurrentConversation"
         />
       </el-tab-pane>
+      <!--      -->
       <el-tab-pane label="好友">
         <span slot="label"><i class="el-icon-user"></i></span>
         <div class="friend-tab-header space-bw">
-          <el-input size="mini" v-model="newFenzuName" placeholder="请输入分组名" style="marginRight: 5px" />
+          <el-input size="mini" v-model="newFenzuName" placeholder="请输入分组名" style="marginRight: 5px"/>
           <el-button size="mini" type="success" @click="addNewFenzu" :loading="isAdding">添加</el-button>
         </div>
         <fenzu-conversation-list
@@ -50,9 +52,10 @@ import fenzuConversationList from './FenzuConversation'
 import groupConversationList from './GroupConversation'
 import todo from '@/components/todo'
 import topSearch from './TopSearch'
-import { SET_UNREAD_NEWS_TYPE_MAP } from '@/store/constants'
-import { conversationTypes } from '@/const'
-import { saveMyFriendsToLocalStorage, saveMyGroupToLocalStorage } from '@/utils'
+import {SET_UNREAD_NEWS_TYPE_MAP} from '@/store/constants'
+import {conversationTypes} from '@/const'
+import {saveMyFriendsToLocalStorage, saveMyGroupToLocalStorage} from '@/utils'
+
 export default {
   name: "ConversationListComponent",
   props: {
@@ -105,7 +108,7 @@ export default {
         name: this.newFenzuName.trim(),
         userId: this.userInfo._id
       }
-      const { data } = await this.$http.addNewFenzu(params)
+      const {data} = await this.$http.addNewFenzu(params)
       if (data.status !== 2000) {
         this.$message({message: data.msg, type: warning})
       }
@@ -154,19 +157,24 @@ export default {
 
 <style lang="scss">
 @import './../../../static/css/var.scss';
+
 .conversationlist-com {
   height: 100%;
   padding: 0 5px;
+
   .search {
     padding: 10px 0;
   }
+
   .todo {
     padding-bottom: 10px;
   }
+
   .el-tabs.el-tabs--top.el-tabs--border-card {
     height: calc(100% - 120px);
     overflow-x: hidden;
     background-color: $normalbg;
+
     .el-tabs__header {
       background-color: $seatbg;
       // background-color: $secondarybg;
@@ -174,6 +182,7 @@ export default {
         background-color: $normalbg;
       }
     }
+
     .el-tabs__content {
       padding: 0;
       height: calc(100% - 40px);
@@ -181,15 +190,18 @@ export default {
       // overflow: scroll;
       // overflow-x: hidden;
       position: relative;
+
       .friend-tab-header {
         padding: 10px;
       }
     }
   }
+
   .el-collapse {
     .el-collapse-item__header {
       padding-left: 10px;
     }
+
     .el-collapse-item__content {
       padding-bottom: 0;
     }

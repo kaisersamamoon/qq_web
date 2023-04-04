@@ -25,11 +25,11 @@
         <el-dropdown-item>
           <el-button type="text" @click="setShowTheme(true)">主题设置</el-button>
         </el-dropdown-item>
-        <el-dropdown-item>
-          <router-link to="/chat/setting" class="aside-menu-link">
-            <el-button type="text">反馈</el-button>
-          </router-link>
-        </el-dropdown-item>
+<!--        <el-dropdown-item>-->
+        <!--          <router-link to="/views/setting" class="aside-menu-link">-->
+        <!--            <el-button type="text">反馈</el-button>-->
+        <!--          </router-link>-->
+        <!--        </el-dropdown-item>-->
         <el-dropdown-item>
           <el-button type="text" @click="logout">退出登录</el-button>
         </el-dropdown-item>

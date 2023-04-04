@@ -119,6 +119,7 @@ const login = (req, res) => {
 
 // 注册
 const register = (req, res) => {
+
   let { account, password, rePassword, cvCode, avatar } = req.body
   if (password !== rePassword) {
     return res.json({

@@ -1,0 +1,65 @@
+{
+  "id": "3992322",
+  "name": "chatIcon",
+  "font_family": "iconfont",
+  "css_prefix_text": "chat-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "9512510",
+      "name": "对话",
+      "font_class": "chat-fill",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "9512597",
+      "name": "消息",
+      "font_class": "message",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "9512623",
+      "name": "团队",
+      "font_class": "group",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "9512636",
+      "name": "我的",
+      "font_class": "my",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "19317340",
+      "name": "人员-添加",
+      "font_class": "man-add",
+      "unicode": "e69a",
+      "unicode_decimal": 59034
+    },
+    {
+      "icon_id": "9512513",
+      "name": "对话",
+      "font_class": "chat",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "9512600",
+      "name": "朋友圈",
+      "font_class": "moment",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "9512703",
+      "name": "加号",
+      "font_class": "plus",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    }
+  ]
+}

@@ -128,7 +128,7 @@ router.beforeEach((to, from, next) => {
         /** 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由 */
         query: { redirect: to.fullPath }
       })
-    } 
+    }
   }else{
     next()
   }

@@ -1,9 +1,10 @@
 <template>
   <div class="layout-header__com">
     <el-header>
+<!--      视频流：白板 音视频组件-->
       <div class="logo">
         <router-link to="/" class="logo-link">
-          Co-Messager
+          Chat
           <span class="logo-img"></span>
         </router-link>
       </div>
@@ -11,14 +12,18 @@
         <span class="item">
           <router-link to="/add" tag="span">
             加好友 <i class="el-icon-plus"></i>
+            hahah
           </router-link>
+
         </span>
         <span class="item">
           <router-link to="/mzone" tag="span">
             发动态 <i class="el-icon-plus"></i>
+            hahahs
           </router-link>
         </span>
       </div>
+<!--      主页设置弹窗-->
       <div class="user-info">
         <el-dropdown class="droplist">
           <span class="el-dropdown-link">
@@ -71,13 +76,17 @@
         </div>
       </div>
     </el-header>
+
     <transition name="fade">
       <vue-draggable-resizable
         v-if="isToCoArtBoard"
         drag-cancel=".drawingarea"
       >
         <div class="co-art-board">
-          <co-art-board :currentconversation="currentConversation" :state="webRTCState" :web-rtc-type="WEB_RTC_MSG_TYPE.artBoard" />
+          <co-art-board
+            :currentconversation="currentConversation"
+            :state="webRTCState"
+            :web-rtc-type="WEB_RTC_MSG_TYPE.artBoard" />
         </div>
       </vue-draggable-resizable>
     </transition>
@@ -165,7 +174,7 @@ export default {
             callback: action => {
               this.$store.dispatch('app/SET_ISTOCOARTBOARD', false)
               this.$store.dispatch('app/SET_IS_AUDIOING', false)
-              this.$store.dispatch('app/SET_IS_VIDEOING', false)             
+              this.$store.dispatch('app/SET_IS_VIDEOING', false)
             }
           });
         }, 10000)

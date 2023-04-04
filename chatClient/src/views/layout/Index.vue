@@ -4,7 +4,8 @@
       <i class="icon el-icon-thumb"></i>
     </div>
     <transition name="fade">
-      <main v-show="showMain" class="co-messager-layout">
+      <main v-show="showMain" class="Chat-layout">
+        <!--      视频流：白板 音视频组件-->
         <my-header></my-header>
         <!-- filter-bgc是用于设置背景虚化的，因为使用了filter以及transform后fixed会改变 -->
         <div
@@ -16,19 +17,21 @@
           }"
         />
         <el-main
-          :class="device === 'Mobile' ? 'co-messager-main mobile' : 'co-messager-main'"
+          :class="device === 'Mobile' ? 'Chat-main mobile' : 'Chat-main'"
           v-css=" opacity !== 1 ? {'opacity': opacity} : {}"
         >
           <audio :src="NotifyAudio" ref="audio" muted></audio>
           <transition name="slide-left">
             <div
-              :class="device === 'Mobile' ? 'co-messager-aside mobile' : 'co-messager-aside'"
+              :class="device === 'Mobile' ? 'Chat-aside mobile' : 'Chat-aside'"
               v-css="device === 'Mobile' ? {'transform': 'translateX(' + asideTranslateX + 'px)'} : ''"
             >
+<!-- 右边侧边栏-->
               <my-aside :set-show-theme="setShowTheme" />
             </div>
           </transition>
-          <div :class="device === 'Mobile' ? 'co-messager-content mobile' : 'co-messager-content'">
+<!--          主体-->
+          <div :class="device === 'Mobile' ? 'Chat-content mobile' : 'Chat-content'">
             <keep-alive :include="include">
               <router-view v-if="$route.meta.keepAlive"></router-view>
             </keep-alive>
@@ -38,6 +41,7 @@
       </main>
     </transition>
     <transition name="fade">
+<!--      背景设置 事件来源于孙组件-->
       <theme v-if="showTheme" @setShowTheme="setShowTheme" />
     </transition>
     <!-- 在移动端下点击展示左边菜单 -->
@@ -60,11 +64,17 @@ import { saveRecentConversationToLocal } from '@/utils'
 import { SET_UNREAD_NEWS_TYPE_MAP } from '@/store/constants'
 import theme from '@/components/theme'
 import NotifyAudio from './../../../static/audio/notify.mp3'
+// 主界面背景图
 const systemPictureMap = {
-  abstract: require('./../../../static/image/theme/abstract.jpg'),
-  city: require('./../../../static/image/theme/city.jpg'),
-  ocean: require('./../../../static/image/theme/ocean.jpg')
+  // abstract: require('./../../../static/image/theme/abstract.jpg'),
+  // city: require('./../../../static/image/theme/city.jpg'),
+  // ocean: require('./../../../static/image/theme/ocean.jpg')
+  blue:require('./../../../static/image/theme/blue.jpg'),
+  cartoon:require('./../../../static/image/theme/cartoon.jpg'),
+  train:require('./../../../static/image/theme/train.jpg'),
+  forest:require('./../../../static/image/theme/forest.jpg'),
 }
+// 提示音 与系统设置页面一致
 const notifySoundMap = {
   default: require('./../../../static/audio/default.mp3'),
   apple: require('./../../../static/audio/apple.mp3'),
@@ -118,6 +128,8 @@ export default {
     },
     bgImg: {
       handler(bgImg) {
+        console.log(bgImg)
+        console.log("这是bgimg")
         /**如果是base64就直接使用否则从系统自带图片获取 */
         if (bgImg.includes('base64')) {
           this.bgImgUrl = bgImg
@@ -286,7 +298,7 @@ export default {
       border-radius: 50%;
     }
   }
-  .co-messager-layout {
+  .Chat-layout {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
@@ -302,7 +314,7 @@ export default {
       background-size: cover;
       background-attachment: fixed;
     }
-    .co-messager-main {
+    .Chat-main {
       display: flex;
       position: absolute;
       left: 50%;
@@ -324,7 +336,7 @@ export default {
         height: 100%;
         border-radius: 0px;
       }
-      .co-messager-aside {
+      .Chat-aside {
         width: 7%;
         height: 100%;
         border-right: 1px solid #cccccc;
@@ -334,7 +346,7 @@ export default {
           width: 70px;
         }
       }
-      .co-messager-content {
+      .Chat-content {
         width: 93%;
         &.mobile {
           width: 100%;

@@ -1,11 +1,12 @@
 <template>
   <div class="index-page">
+    <!--    侧边栏-->
     <transition name="fade-left">
       <div
         v-show="device === 'Desktop' || (device === 'Mobile' && currentUI === 'conversation')"
         :class="device === 'Mobile' ? 'conversation-list mobile' : 'conversation-list'"
       >
-<!--        消息列表-->
+        <!-- setCurrentConversation     来源于孙组件-->
         <conversation-list
           :currentConversation="currentConversation"
           :set-current-conversation="setCurrentConversation"
@@ -25,8 +26,9 @@
           :setLoading="setLoading"
           :set-current-conversation="setCurrentConversation"
         />
+
         <div class="no-conversation hor-ver-center" v-else>
-          <chat-svg width="400" height="300" />
+          <chat-svg width="400" height="300"/>
           <p>聊天~打开心灵的窗户</p>
         </div>
       </div>
@@ -37,8 +39,8 @@
 <script>
 import ConversationList from '@/views/conversation/ConversationList'
 import ChatArea from '@/views/chat/ChatArea'
-import { SET_UNREAD_NEWS_TYPE_MAP } from '@/store/constants'
-import { fromatTime, saveRecentConversationToLocal } from '@/utils'
+import {SET_UNREAD_NEWS_TYPE_MAP} from '@/store/constants'
+import {fromatTime, saveRecentConversationToLocal} from '@/utils'
 import weather from '@/components/customWeather'
 import partTitle from '@/components/partTitle'
 import chatSvg from '@/SVGComponents/chat'
@@ -50,9 +52,9 @@ export default {
       currentConversation: {},
       loading: false,
       matterLevelMap: {
-        'danger': '紧急事项' ,
-        'warning': '重要事项' ,
-        'normal': '一般事项' ,
+        'danger': '紧急事项',
+        'warning': '重要事项',
+        'normal': '一般事项',
         'info': '不重要事项'
       }
     }
@@ -73,7 +75,7 @@ export default {
       handler(newVal, oldVal) {
         if (!newVal || !newVal.roomid) return
         try {
-          if(newVal.roomid !== oldVal.roomid) {
+          if (newVal.roomid !== oldVal.roomid) {
             this.$store.dispatch('news/SET_UNREAD_NEWS', {
               roomid: this.currentConversation && this.currentConversation.roomid,
               count: 0,
@@ -130,27 +132,33 @@ export default {
 
 <style lang="scss">
 @import './../../static/css/animation.scss';
+
 .index-page {
   display: flex;
   width: 100%;
   // height: calc(100vh - 60px);
   height: 100%;
+
   .conversation-list {
     width: 30%;
     border-right: 1px solid #cccccc;
     background-color: var(--primary-bgcolor-4);
+
     &.mobile {
       position: absolute;
       width: 100%;
     }
   }
+
   .conversation-chat-area {
     position: relative;
     width: 70%;
+
     &.mobile {
       // position: absolute;
       width: 100%;
     }
+
     .no-conversation {
       text-align: center;
     }

@@ -16,10 +16,10 @@
         <div class="theme-item">
           <p class="title">背景图片</p>
           <el-radio-group v-model="bgImg" size="small" @change="bgImgChange">
-            <el-radio label="abstract" border>抽象</el-radio>
-            <el-radio label="city" border>城市</el-radio>
-            <el-radio label="ocean" border>海岸</el-radio>
-            <el-radio label="custom" border>自定义</el-radio>
+            <el-radio label="blue" border>默认</el-radio>
+            <el-radio label="cartoon" border>卡通</el-radio>
+            <el-radio label="forest" border>森林</el-radio>
+            <el-radio label="train" border>海岸</el-radio>
           </el-radio-group>
           <div class="bgimg-preview">
             <div v-if="bgImg === 'custom'" class="curp">
@@ -29,7 +29,9 @@
                 <input style="display: none" type="file" name="customImg" id="customImg" @change="customBgImg">
               </label>
             </div>
-            <img v-show="bgImg !== 'custom'" :src="systemPictureMap[bgImg]" alt="" srcset="" width="200" height="110" />
+            <img v-show="bgImg !== 'custom'"
+                 :src="systemPictureMap[bgImg]"
+                 alt="" srcset="" width="200" height="110" />
           </div>
         </div>
         <div class="theme-item notify-sound">
@@ -47,12 +49,12 @@
             </el-switch>
           </p>
           <el-radio-group v-model="notifySound" size="small" @change="notifySoundChange">
-            <el-radio label="default" border :disabled="!isNotifySound">默认</el-radio>
-            <el-radio label="pcqq" border :disabled="!isNotifySound">PC QQ</el-radio>
-            <el-radio label="mobileqq" border :disabled="!isNotifySound">手机QQ</el-radio>
-            <el-radio label="huaji" border :disabled="!isNotifySound">滑稽</el-radio>
-            <el-radio label="apple" border :disabled="!isNotifySound">苹果</el-radio>
-            <el-radio label="momo" border :disabled="!isNotifySound">陌陌</el-radio>
+            <el-radio label="default" border :disabled="!isNotifySound">DEFAULT</el-radio>
+            <el-radio label="pcqq" border :disabled="!isNotifySound">QQ-PC</el-radio>
+            <el-radio label="mobileqq" border :disabled="!isNotifySound">QQ-PHONE</el-radio>
+            <el-radio label="huaji" border :disabled="!isNotifySound">FUNNY</el-radio>
+            <el-radio label="apple" border :disabled="!isNotifySound">APPLE</el-radio>
+            <el-radio label="momo" border :disabled="!isNotifySound">MOMO</el-radio>
           </el-radio-group>
         </div>
         <div class="theme-item color-pick">
@@ -73,6 +75,7 @@ import { mapState } from 'vuex'
 import { localImgToBase64 } from '@/utils'
 import colorPick from '@/components/colorPick'
 import { connect } from 'tls';
+// 提示音
 const notifySoundMap = {
   default: require('./../../../static/audio/default.mp3'),
   apple: require('./../../../static/audio/apple.mp3'),
@@ -82,10 +85,15 @@ const notifySoundMap = {
   mobileqq: require('./../../../static/audio/mobileqq.mp3'),
   none: ''
 }
+// 背景图片
 const systemPictureMap = {
-  abstract: require('./../../../static/image/theme/abstract.jpg'),
-  city: require('./../../../static/image/theme/city.jpg'),
-  ocean: require('./../../../static/image/theme/ocean.jpg')
+  blue:require('./../../../static/image/theme/blue.jpg'),
+  cartoon:require('./../../../static/image/theme/cartoon.jpg'),
+  train:require('./../../../static/image/theme/train.jpg'),
+  forest:require('./../../../static/image/theme/forest.jpg'),
+  // abstract: require('./../../../static/image/theme/abstract.jpg'),
+  // city: require('./../../../static/image/theme/city.jpg'),
+  // ocean: require('./../../../static/image/theme/ocean.jpg')
 }
 const localBase64 = (window.localStorage.getItem('theme-bgimg') || '').includes('base64') ? window.localStorage.getItem('theme-bgimg') : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXMAAADPAQMAAAA9C6NrAAAAAXNSR0IArs4c6QAAAANQTFRFyb2Z4bxrAAAAACBJREFUaN7twTEBAAAAwqD1T20MH6AAAAAAAAAAAADgbybQAAFm0AbzAAAAAElFTkSuQmCC'
 let isPlaying = false

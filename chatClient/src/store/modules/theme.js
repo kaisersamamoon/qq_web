@@ -20,7 +20,7 @@ const _initThemeCSSVariable = (color, bgColor) => {
   }
   document.documentElement.style.cssText = CSSVar
 }
-
+// 默认
 const state = {
   /**透明度 */
   opacity: localStorageManager.getJson('theme-opacity')  || 0.75,
@@ -31,7 +31,7 @@ const state = {
    * 系统默认的有abstract.jpg\city.jpg\ocean.jpg
    * 区分系统自带和用户自定义判断是否包含base64
    * */
-  bgImg: localStorageManager.getStr('theme-bgimg') || 'abstract',
+  bgImg: localStorageManager.getStr('theme-bgimg') || 'blue',
   notifySound: localStorageManager.getStr('theme-notifysound') || 'default',
   // isNotifySound: localStorageManager.get('theme-blur') || 10
   /**字体颜色 #000 */

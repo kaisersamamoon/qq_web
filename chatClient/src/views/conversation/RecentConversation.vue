@@ -1,7 +1,9 @@
 <template>
-<!--  有聊天消息-->
+
   <div class="recent-conversation-list" v-loading="isLoading">
     <transition-group name="slide-up" appear>
+
+      <!--  有聊天消息-->
       <conversation-item
         v-for="item in outcomeConversationList"
         :key="item._id"
@@ -174,6 +176,7 @@ export default {
       })
     },
     changeCurrentConversation(item) {
+
       this.$emit('setCurrentConversation', item)
     }
   },

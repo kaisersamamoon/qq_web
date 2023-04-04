@@ -5,7 +5,7 @@
         <img :src="IMG_URL + userInfo.photo" alt="" srcset="">
       </div>
       <div class="info-list">
-        <div class="info-item">MessagerId：{{userInfo.code}}</div>
+        <div class="info-item">ChatId：{{userInfo.code}}</div>
         <div class="info-item">账号：{{userInfo.name}}</div>
         <div class="info-item">注册时间：{{userInfo.signUpTime | formatDate}}</div>
         <div class="info-item">登录时间：{{userInfo.lastLoginTime | formatDate}}</div>
